@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/srv/share
+    networks:
+      - frontend
+
+  caddy:
+    build:
+      context: .
+      dockerfile: caddy/Dockerfile
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./public:/srv/share/public
+    ports:
+      - "3002:80"
+    networks:
+      - frontend
+    # Default command with --watch for automatic config update
+    command: caddy run --watch --config /etc/caddy/Caddyfile --adapter caddyfile
+
+networks:
+  frontend:

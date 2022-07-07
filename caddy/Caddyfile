@@ -1,0 +1,7 @@
+http://bank-finder.localhost {
+    root * /srv/share/public
+    php_fastcgi app:9000
+
+    encode gzip
+    file_server
+}
