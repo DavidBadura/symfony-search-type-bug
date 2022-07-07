@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\SearchType;
+use App\Form\OtherNameType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 #[AsController]
-class IndexAction
+class OtherAction
 {
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
@@ -19,11 +19,11 @@ class IndexAction
     ) {
     }
 
-    #[Route('/')]
+    #[Route('/other')]
     public function __invoke(Request $request): Response
     {
-        $form = $this->formFactory->create(SearchType::class);
-        //$form = $this->formFactory->createBuilder(SearchType::class)->getForm();
+        $form = $this->formFactory->create(OtherNameType::class);
+        //$form = $this->formFactory->createBuilder(OtherNameType::class)->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
